@@ -53,7 +53,7 @@ export default function LandingPage() {
                 </Text>
                 <Flex
                     gap={"3"}
-                    className="mt-5 flex-nowrap max-[426px]:flex-wrap"
+                    className="mt-5 flex-nowrap max-[567px]:flex-wrap"
                 >
                     <Card>
                         <PlusCircledIcon
@@ -91,19 +91,19 @@ export default function LandingPage() {
                 </Flex>
             </Box>
 
-            <Box className=" bg-gray-900 border-1 border-gray-700 rounded-2xl h-[13rem] mt-10 max-w-[800px] mx-auto">
+            <Box className=" bg-gray-900 border-1 border-gray-700 rounded-2xl min-h-[13rem] mt-10 max-w-[800px] mx-auto">
                 <Flex
                     align={"center"}
                     justify={"between"}
                     gap={"5"}
-                    className="h-full px-10"
+                    className="h-full px-10 py-20 flex-col sm:flex-row "
                 >
                     <Box>
                         <Text as="p" className="text-2xl font-bold">
                             Focus on what matters. We'll handle the rest.
                         </Text>
                     </Box>
-                    <Button size={"4"}>
+                    <Button size={"4"} className="w-auto">
                         <CheckIcon />
                         <Link
                             to={"/login"}
