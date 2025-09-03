@@ -2,13 +2,21 @@ import { Box, Button, Container, Flex } from "@radix-ui/themes";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { DropdownMenu } from "radix-ui";
 import { Link, Outlet } from "react-router-dom";
+import AOS from "aos";
+import { useEffect } from "react";
 
 export default function RootLayout() {
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    });
     return (
         <Container className="p-4">
             <header>
                 <Flex justify="between" align="center">
-                    <Box>
+                    <Box data-aos="fade-right">
                         <Link
                             to={"/"}
                             className="text-4xl font-extrabold text-blue-400"
@@ -16,7 +24,7 @@ export default function RootLayout() {
                             Task Tracker
                         </Link>
                     </Box>
-                    <Box>
+                    <Box data-aos="fade-left">
                         <nav className="hidden md:flex">
                             <Flex gap="4" align={"center"}>
                                 <Link
