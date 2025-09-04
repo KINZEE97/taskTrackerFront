@@ -21,7 +21,11 @@ export default function RootLayout() {
                             to={"/"}
                             className="text-4xl font-extrabold text-blue-400"
                         >
-                            Task Tracker
+                            <img
+                                src="/tasktracker-logo.png"
+                                alt="task tracker logo"
+                                className="h-20 "
+                            />
                         </Link>
                     </Box>
                     <Box data-aos="fade-left">
