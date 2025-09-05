@@ -7,18 +7,23 @@ import { useAppContext } from "../hook/useAppContext";
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { login } = useAppContext();
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
-            login(email, password);
+            await login(email, password);
+
             setEmail("");
             setPassword("");
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -95,7 +100,7 @@ export default function Login() {
                         </Form.Control>
                     </Form.Field>
                     <Form.Submit asChild>
-                        <Button size={"3"} loading={false} type="submit">
+                        <Button size={"3"} loading={loading} type="submit">
                             Login
                         </Button>
                     </Form.Submit>
