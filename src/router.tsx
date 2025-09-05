@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import RootLayout from "./components/RootLayout";
 import LandingPage from "./page/LandingPage";
 import FeaturesPage from "./page/FeaturesPage";
 import Login from "./page/LoginPage";
+import Dashboard from "./page/DashboardPage";
+import PublicRoutes from "./components/PublicRoutes";
 
 const router = createBrowserRouter([
     {
@@ -11,7 +14,22 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <LandingPage /> },
             { path: "features", element: <FeaturesPage /> },
-            { path: "login", element: <Login /> },
+            {
+                path: "login",
+                element: (
+                    <PublicRoutes>
+                        <Login />
+                    </PublicRoutes>
+                ),
+            },
+            {
+                path: "dashboard",
+                element: (
+                    <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                ),
+            },
         ],
     },
 ]);
