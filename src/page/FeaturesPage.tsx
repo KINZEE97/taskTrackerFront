@@ -48,44 +48,47 @@ export default function FeaturesPage() {
             </Box>
 
             <Flex className="mt-[5rem]" gap={"5"}>
-                <Box
-                    className="border-1 border-gray-700 w-[25rem] h-[13rem] rounded-2xl bg-gray-900"
-                    data-aos="fade-right"
-                    data-aos-delay="400"
-                >
-                    <Text
-                        className="p-3 text-gray-400 font-bold text-[.9rem]"
-                        as="p"
+                <div className="max-w-[25rem] hidden md:block">
+                    <Box
+                        className=" border-1 border-gray-700 w-[25rem] h-[13rem] rounded-2xl bg-gray-900"
+                        data-aos="fade-right"
+                        data-aos-delay="400"
                     >
-                        Browse
-                    </Text>
-                    <Flex className="px-4" gap={"2"} direction={"column"}>
-                        <Button
-                            size={"3"}
-                            variant="outline"
-                            onClick={() => scrollTo(prioritizationRef)}
+                        <Text
+                            className="p-3 text-gray-400 font-bold text-[.9rem]"
+                            as="p"
                         >
-                            <BookmarkIcon />
-                            Prioritization
-                        </Button>
-                        <Button
-                            size={"3"}
-                            variant="outline"
-                            onClick={() => scrollTo(remindersRef)}
-                        >
-                            <TimerIcon />
-                            Deadline reminders
-                        </Button>{" "}
-                        <Button
-                            size={"3"}
-                            variant="outline"
-                            onClick={() => scrollTo(analyticsRef)}
-                        >
-                            <PieChartIcon />
-                            Progress analytics
-                        </Button>
-                    </Flex>
-                </Box>
+                            Browse
+                        </Text>
+                        <Flex className="px-4" gap={"2"} direction={"column"}>
+                            <Button
+                                size={"3"}
+                                variant="outline"
+                                onClick={() => scrollTo(prioritizationRef)}
+                            >
+                                <BookmarkIcon />
+                                Prioritization
+                            </Button>
+                            <Button
+                                size={"3"}
+                                variant="outline"
+                                onClick={() => scrollTo(remindersRef)}
+                            >
+                                <TimerIcon />
+                                Deadline reminders
+                            </Button>{" "}
+                            <Button
+                                size={"3"}
+                                variant="outline"
+                                onClick={() => scrollTo(analyticsRef)}
+                            >
+                                <PieChartIcon />
+                                Progress analytics
+                            </Button>
+                        </Flex>
+                    </Box>
+                </div>
+
                 <Flex direction={"column"} gap={"8"} className="w-full">
                     <Box
                         className="border-1 border-gray-700 bg-gray-900 rounded-2xl w-full min-h-[35rem]"
@@ -105,7 +108,10 @@ export default function FeaturesPage() {
                                 Use tags, labels, and colored indicators to stay
                                 organized.
                             </Text>
-                            <Flex className="mt-4" gap={"2"}>
+                            <Flex
+                                className="mt-4 flex-wrap md:flex-nowrap"
+                                gap={"2"}
+                            >
                                 <Card>
                                     <Box className="bg-blue-950 p-2 rounded-full max-w-[2rem] mb-2">
                                         <BookmarkIcon />
@@ -197,7 +203,10 @@ export default function FeaturesPage() {
                                 timely reminders so nothing slips through the
                                 cracks.
                             </Text>
-                            <Flex className="mt-4" gap={"2"}>
+                            <Flex
+                                className="mt-4 flex-wrap md:flex-nowrap"
+                                gap={"2"}
+                            >
                                 <Card>
                                     <Box className="bg-blue-950 p-2 rounded-full max-w-[2rem] mb-2">
                                         <CalendarIcon />
@@ -253,7 +262,10 @@ export default function FeaturesPage() {
                                 />
                             </Box>
 
-                            <Flex gap={"2"}>
+                            <Flex
+                                gap={"2"}
+                                className="flex-wrap min-[855px]:flex-nowrap"
+                            >
                                 <Button size={"3"}>
                                     <ClockIcon className="mr-[0] " />
                                     <Link to={"/login"} className="font-light">
@@ -291,7 +303,10 @@ export default function FeaturesPage() {
                                 tasks by status (pending, in Progress, late or
                                 done) and identify bottlenecks.
                             </Text>
-                            <Flex className="mt-4" gap={"2"}>
+                            <Flex
+                                className="mt-4 flex-wrap md:flex-nowrap"
+                                gap={"2"}
+                            >
                                 <Card className="max-w-[16rem]">
                                     <Box className="bg-blue-950 p-2 rounded-full max-w-[2rem] mb-2">
                                         <PieChartIcon />

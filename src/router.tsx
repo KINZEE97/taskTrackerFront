@@ -6,6 +6,7 @@ import FeaturesPage from "./page/FeaturesPage";
 import Login from "./page/LoginPage";
 import Dashboard from "./page/DashboardPage";
 import PublicRoutes from "./components/PublicRoutes";
+import LogedLayout from "./components/LogedLayout";
 
 const router = createBrowserRouter([
     {
@@ -22,8 +23,14 @@ const router = createBrowserRouter([
                     </PublicRoutes>
                 ),
             },
+        ],
+    },
+    {
+        path: "dashboard",
+        element: <LogedLayout />,
+        children: [
             {
-                path: "dashboard",
+                index: true,
                 element: (
                     <ProtectedRoute>
                         <Dashboard />
