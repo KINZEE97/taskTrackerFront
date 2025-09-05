@@ -1,11 +1,26 @@
 import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import { Form } from "radix-ui";
 import { EnterIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import { useAppContext } from "../hook/useAppContext";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const { login } = useAppContext();
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+
+        try {
+            login(email, password);
+            setEmail("");
+            setPassword("");
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <Flex
@@ -30,7 +45,7 @@ export default function Login() {
                     Sign in to manage your task and stay on the top of your day.
                 </Text>
 
-                <Form.Root className="w-full mt-2 px-4">
+                <Form.Root className="w-full mt-2 px-4" onSubmit={handleSubmit}>
                     <Form.Field name="email">
                         <Flex justify={"between"}>
                             <Form.Label className="mb-2">Email:</Form.Label>
@@ -80,7 +95,7 @@ export default function Login() {
                         </Form.Control>
                     </Form.Field>
                     <Form.Submit asChild>
-                        <Button size={"3"} loading={false}>
+                        <Button size={"3"} loading={false} type="submit">
                             Login
                         </Button>
                     </Form.Submit>
