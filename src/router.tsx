@@ -7,6 +7,7 @@ import Login from "./page/LoginPage";
 import Dashboard from "./page/DashboardPage";
 import PublicRoutes from "./components/PublicRoutes";
 import LogedLayout from "./components/LogedLayout";
+import RegisterPage from "./page/RegisterPage";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <LandingPage /> },
             { path: "features", element: <FeaturesPage /> },
+            { path: "register", element: <RegisterPage /> },
             {
                 path: "login",
                 element: (

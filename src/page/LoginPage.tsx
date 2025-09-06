@@ -1,9 +1,10 @@
 import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import { Form, Toast } from "radix-ui";
 import { EnterIcon } from "@radix-ui/react-icons";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useAppContext } from "../hook/useAppContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AOS from "aos";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -13,6 +14,13 @@ export default function Login() {
 
     const { login } = useAppContext();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    });
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -39,7 +47,10 @@ export default function Login() {
                 justify={"center"}
                 height={"80vh"}
             >
-                <Box className="border-1 rounded-2xl border-gray-700 p-2 w-[28rem] h-[20rem] bg-gray-900 ">
+                <Box
+                    className="border-1 rounded-2xl border-gray-700 p-2 w-[28rem] h-[20rem] bg-gray-900 "
+                    data-aos="fade-up"
+                >
                     <Flex
                         className="p-4 inline-block"
                         direction={"row"}
@@ -60,20 +71,20 @@ export default function Login() {
                     </Text>
 
                     <Form.Root
-                        className="w-full mt-2 px-4"
+                        className="w-full mt-2 px-4 "
                         onSubmit={handleSubmit}
                     >
                         <Form.Field name="email">
                             <Flex justify={"between"}>
                                 <Form.Label className="mb-2">Email:</Form.Label>
                                 <Form.Message
-                                    className="text-sm opacity-80 mr-[7rem]"
+                                    className="text-sm opacity-80 mr-[7rem] text-red-500"
                                     match="valueMissing"
                                 >
                                     Please enter your email
                                 </Form.Message>
                                 <Form.Message
-                                    className="text-sm opacity-80 mr-[7rem]"
+                                    className="text-sm opacity-80 mr-[7rem] text-red-500"
                                     match="typeMismatch"
                                 >
                                     Please provide a valid Email
@@ -96,7 +107,7 @@ export default function Login() {
                                     Password:
                                 </Form.Label>
                                 <Form.Message
-                                    className="text-sm opacity-80  mr-[7rem]"
+                                    className="text-sm opacity-80  mr-[7rem] text-red-500"
                                     match="valueMissing"
                                 >
                                     Please enter your password
@@ -120,6 +131,11 @@ export default function Login() {
                                 Login
                             </Button>
                         </Form.Submit>
+                        <Link to="/register">
+                            <Text className="text-gray-400 text-sm font-light pl-20 hover:text-white transition">
+                                Don't have an account? Register.
+                            </Text>
+                        </Link>
                     </Form.Root>
                 </Box>
             </Flex>

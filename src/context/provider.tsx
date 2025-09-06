@@ -35,8 +35,26 @@ const AuthContextProvider = ({ children }: Props) => {
         }
     };
 
+    const register = async (name: string, email: string, password: string) => {
+        try {
+            const reponse = await api.post("/register", {
+                name,
+                email,
+                password,
+            });
+
+            console.log(reponse);
+            return reponse.data;
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                throw new Error(error.response?.data.message);
+            }
+        }
+    };
+
     const methods = {
         login,
+        register,
     };
 
     return (
