@@ -8,6 +8,7 @@ import Dashboard from "./page/DashboardPage";
 import PublicRoutes from "./components/PublicRoutes";
 import LogedLayout from "./components/LogedLayout";
 import RegisterPage from "./page/RegisterPage";
+import Profile from "./page/ProfilePage";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute>
                         <Dashboard />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "profile",
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
                     </ProtectedRoute>
                 ),
             },

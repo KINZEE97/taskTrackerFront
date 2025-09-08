@@ -93,7 +93,8 @@ export default function RootLayout() {
             <footer>
                 <Box className="text-center text-gray-500">
                     &copy; {new Date().getFullYear()} Task Tracker. All rights
-                    reserved
+                    reserved. WARNING, this web project is only for eductional
+                    purposes.
                 </Box>
             </footer>
         </Container>

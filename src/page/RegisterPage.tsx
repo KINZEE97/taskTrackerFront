@@ -147,7 +147,11 @@ export default function RegisterPage() {
                             className="py-5 px-20 items-center w-full"
                         >
                             <Form.Submit>
-                                <Button loading={loading} size={"3"}>
+                                <Button
+                                    loading={loading}
+                                    size={"3"}
+                                    type="submit"
+                                >
                                     Register
                                 </Button>
                             </Form.Submit>
