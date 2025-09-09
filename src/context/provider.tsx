@@ -8,6 +8,13 @@ export interface Props {
     children: ReactNode;
 }
 
+export interface INewTask {
+    title: string;
+    description: string;
+    status: string;
+    priority: string;
+}
+
 const AuthContextProvider = ({ children }: Props) => {
     const [token, setToken] = useState(() => {
         const storedToken = localStorage.getItem("token");
@@ -52,9 +59,27 @@ const AuthContextProvider = ({ children }: Props) => {
         }
     };
 
+    const addNewTask = async (task: INewTask, token: string) => {
+        try {
+            const response = await api.post("/tasks", task, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(response);
+            return response.data;
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                throw new Error(error.response?.data.message);
+            }
+        }
+    };
+
     const methods = {
         login,
         register,
+        addNewTask,
+        token,
     };
 
     return (
