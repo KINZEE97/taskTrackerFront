@@ -8,16 +8,16 @@ interface Props {
 }
 
 const colorPriorityMap: Record<string, string> = {
-    high: "red",
-    medium: "yellow",
-    low: "green",
+    HIGH: "red",
+    MEDIUM: "yellow",
+    LOW: "green",
 };
 
 const colorStatusMap: Record<string, string> = {
-    done: "green",
-    in_progress: "blue",
-    pending: "yellow",
-    late: "red",
+    DONE: "green",
+    IN_PROGRESS: "blue",
+    PENDING: "yellow",
+    LATE: "red",
 };
 
 export default function GenericCard({ data, status }: Props) {
@@ -57,7 +57,7 @@ export default function GenericCard({ data, status }: Props) {
 
                     <Flex align={"center"} justify={"between"} className="mt-4">
                         <Button color="green">
-                            {task.status === "pending" ? (
+                            {task.status === "PENDING" ? (
                                 <>
                                     <CheckIcon />
                                     Start
