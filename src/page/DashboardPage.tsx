@@ -16,7 +16,6 @@ export default function Dashboard() {
         const fetchTasks = async () => {
             try {
                 const response = await getAllTasks(token);
-                console.log(response);
                 setTasks(response);
             } catch (error) {
                 console.log(error);
@@ -25,14 +24,26 @@ export default function Dashboard() {
         fetchTasks();
     }, [getAllTasks]);
 
+    function onDelete(id: string) {
+        setTasks((prev) => prev.filter((task) => task.id !== id));
+    }
+
     return (
         <Box className="mt-4">
             <AddTaskButton />
             <Grid columns={"4"} gap={"5"} className="mt-4">
-                <GenericCard data={tasks} status="PENDING" />
-                <GenericCard data={tasks} status="IN_PROGRESS" />
-                <GenericCard data={tasks} status="LATE" />
-                <GenericCard data={tasks} status="DONE" />
+                <GenericCard
+                    data={tasks}
+                    status="PENDING"
+                    onDelete={onDelete}
+                />
+                <GenericCard
+                    data={tasks}
+                    status="IN_PROGRESS"
+                    onDelete={onDelete}
+                />
+                <GenericCard data={tasks} status="LATE" onDelete={onDelete} />
+                <GenericCard data={tasks} status="DONE" onDelete={onDelete} />
             </Grid>
         </Box>
     );

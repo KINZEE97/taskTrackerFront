@@ -91,11 +91,28 @@ const AuthContextProvider = ({ children }: Props) => {
         }
     };
 
+    const handleDeleteTask = async (id: string, token: string) => {
+        try {
+            const response = await api.delete(`/tasks/${id}`, {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
+            console.log(response);
+            return response.data;
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                throw new Error(error.response?.data.message);
+            }
+        }
+    };
+
     const methods = {
         login,
         register,
         addNewTask,
         getAllTasks,
+        handleDeleteTask,
         token,
     };
 
