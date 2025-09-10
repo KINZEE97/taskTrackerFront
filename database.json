@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Buy groceries",
+    "description": "Milk, eggs, bread, fruits, vegetables",
+    "status": "pending",
+    "priority": "high"
+  },
+  {
+    "id": "2",
+    "title": "Walk the dog",
+    "description": "Take Max for a walk in the park",
+    "status": "done",
+    "priority": "medium"
+  },
+  {
+    "id": "3",
+    "title": "Pay bills",
+    "description": "Electricity, internet, water",
+    "status": "pending",
+    "priority": "high"
+  },
+  {
+    "id": "4",
+    "title": "Read a book",
+    "description": "Finish 'The Hitchhiker's Guide to the Galaxy'",
+    "status": "in progress",
+    "priority": "low"
+  },
+  {
+    "id": "5",
+    "title": "Go to the gym",
+    "description": "Workout for 1 hour",
+    "status": "late",
+    "priority": "medium"
+  }
+]

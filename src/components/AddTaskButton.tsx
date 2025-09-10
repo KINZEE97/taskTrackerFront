@@ -274,11 +274,8 @@ export default function AddTaskButton() {
                                         Add New Task
                                     </button>
                                 </Form.Submit>
-                                <Dialog.Close
-                                    className="mt-4 bg-gray-600 cursor-pointer p-2 rounded-xl ml-2"
-                                    asChild
-                                >
-                                    <Button>Cancel</Button>
+                                <Dialog.Close className="mt-4 bg-gray-600 cursor-pointer p-2 rounded-xl ml-2">
+                                    Cancel
                                 </Dialog.Close>
                             </Form.Root>
                         </Dialog.Content>
