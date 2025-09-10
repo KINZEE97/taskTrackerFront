@@ -9,6 +9,9 @@ export default function Dashboard() {
             <AddTaskButton />
             <Grid columns={"4"} gap={"5"} className="mt-4">
                 <GenericCard data={database} status="pending" />
+                <GenericCard data={database} status="in_progress" />
+                <GenericCard data={database} status="late" />
+                <GenericCard data={database} status="done" />
             </Grid>
         </Box>
     );

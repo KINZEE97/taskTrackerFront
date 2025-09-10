@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "Buy groceries",
-    "description": "Milk, eggs, bread, fruits, vegetables",
+    "description": "Milk, eggs, bread, fruits, vegetables de alguma",
     "status": "pending",
     "priority": "high"
   },
@@ -24,7 +24,7 @@
     "id": "4",
     "title": "Read a book",
     "description": "Finish 'The Hitchhiker's Guide to the Galaxy'",
-    "status": "in progress",
+    "status": "in_progress",
     "priority": "low"
   },
   {
