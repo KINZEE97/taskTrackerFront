@@ -25,7 +25,7 @@ const colorStatusMap: Record<string, string> = {
 
 export default function GenericCard({ data, status, onDelete }: Props) {
     const filterTask = data.filter((task) => task.status === status);
-    const { handleDeleteTask } = useAppContext();
+    const { handleDeleteTask, updateTaskStatus } = useAppContext();
     const token = localStorage.getItem("token");
     const [loading, setLoading] = useState(false);
 
@@ -36,6 +36,33 @@ export default function GenericCard({ data, status, onDelete }: Props) {
             const response = await handleDeleteTask(id, token);
             onDelete(id);
             console.log(response);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleStatusButton = async (task: Task) => {
+        setLoading(true);
+        if (!token) {
+            throw new Error("no token provided");
+        }
+
+        let newStatus: TaskStatus;
+        if (task.status === "PENDING") newStatus = "IN_PROGRESS";
+        else if (task.status === "IN_PROGRESS") newStatus = "DONE";
+        else return;
+
+        try {
+            const updateTask = await updateTaskStatus(
+                task.id,
+                newStatus,
+                token
+            );
+            console.log(updateTask);
+
+            return updateTask;
         } catch (error) {
             console.log(error);
         } finally {
@@ -80,7 +107,11 @@ export default function GenericCard({ data, status, onDelete }: Props) {
                     </Text>
 
                     <Flex align={"center"} justify={"between"} className="mt-4">
-                        <Button color="green">
+                        <Button
+                            color="green"
+                            onClick={() => handleStatusButton(task)}
+                            loading={loading}
+                        >
                             {task.status === "PENDING" ? (
                                 <>
                                     <CheckIcon />

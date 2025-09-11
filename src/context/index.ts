@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import type { INewTask } from "./provider";
-import type { Task } from "../utils/taskUtils";
+import type { Task, TaskStatus } from "../utils/taskUtils";
 
 export interface AuthContextType {
     login: (email: string, password: string) => Promise<void>;
@@ -8,6 +8,11 @@ export interface AuthContextType {
     addNewTask: (task: INewTask, token: string) => Promise<void>;
     getAllTasks: (token: string) => Promise<Task[]>;
     handleDeleteTask: (id: string, token: string) => Promise<void>;
+    updateTaskStatus: (
+        id: string,
+        task: TaskStatus,
+        token: string
+    ) => Promise<Task>;
     token: string | null;
 }
 

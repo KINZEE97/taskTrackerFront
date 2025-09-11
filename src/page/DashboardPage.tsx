@@ -22,7 +22,7 @@ export default function Dashboard() {
             }
         };
         fetchTasks();
-    }, [getAllTasks]);
+    }, [tasks]);
 
     function onDelete(id: string) {
         setTasks((prev) => prev.filter((task) => task.id !== id));

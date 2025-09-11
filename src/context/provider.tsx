@@ -2,7 +2,8 @@
 import { useState, type ReactNode } from "react";
 import { AuthContext } from ".";
 import api from "../api/axios.ts";
-import { Axios, AxiosError } from "axios";
+import { AxiosError } from "axios";
+import type { TaskStatus } from "../utils/taskUtils.ts";
 
 export interface Props {
     children: ReactNode;
@@ -107,12 +108,36 @@ const AuthContextProvider = ({ children }: Props) => {
         }
     };
 
+    const updateTaskStatus = async (
+        id: string,
+        task: TaskStatus,
+        token: string
+    ) => {
+        try {
+            const response = await api.put(
+                `/tasks/${id}`,
+                { status: task },
+                {
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                }
+            );
+            return response.data;
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                throw new Error(error.response?.data.message);
+            }
+        }
+    };
+
     const methods = {
         login,
         register,
         addNewTask,
         getAllTasks,
         handleDeleteTask,
+        updateTaskStatus,
         token,
     };
 
