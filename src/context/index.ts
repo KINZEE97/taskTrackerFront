@@ -14,6 +14,11 @@ export interface AuthContextType {
         token: string
     ) => Promise<Task>;
     token: string | null;
+    updateTask: (
+        id: string,
+        data: Partial<Omit<Task, "id">>,
+        token: string
+    ) => Promise<Task>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(

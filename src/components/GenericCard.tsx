@@ -1,8 +1,9 @@
 import { Badge, Button, Card, Flex, Text } from "@radix-ui/themes";
 import type { Task, TaskStatus } from "../utils/taskUtils";
-import { CheckIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { CheckIcon } from "@radix-ui/react-icons";
 import { useAppContext } from "../hook/useAppContext";
 import { useState } from "react";
+import UpdateTaskButton from "./UpdateTaskButton";
 
 interface Props {
     data: Task[];
@@ -23,15 +24,22 @@ const colorStatusMap: Record<string, string> = {
     LATE: "red",
 };
 
+const statusOnCapitalizeCase: Record<string, string> = {
+    DONE: "Done",
+    IN_PROGRESS: "In Progress",
+    PENDING: "Pending",
+    LATE: "Late",
+};
+
 export default function GenericCard({ data, status, onDelete }: Props) {
     const filterTask = data.filter((task) => task.status === status);
     const { handleDeleteTask, updateTaskStatus } = useAppContext();
     const token = localStorage.getItem("token");
-    const [loading, setLoading] = useState(false);
+    const [idLoading, setIdLoading] = useState<string | null>(null);
 
     const handleDeleteButton = async (id: string) => {
         if (!token) throw new Error("no token provided");
-        setLoading(true);
+        setIdLoading(id);
         try {
             const response = await handleDeleteTask(id, token);
             onDelete(id);
@@ -39,12 +47,11 @@ export default function GenericCard({ data, status, onDelete }: Props) {
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false);
+            setIdLoading(null);
         }
     };
 
     const handleStatusButton = async (task: Task) => {
-        setLoading(true);
         if (!token) {
             throw new Error("no token provided");
         }
@@ -55,6 +62,7 @@ export default function GenericCard({ data, status, onDelete }: Props) {
         else return;
 
         try {
+            setIdLoading(task.id);
             const updateTask = await updateTaskStatus(
                 task.id,
                 newStatus,
@@ -66,12 +74,15 @@ export default function GenericCard({ data, status, onDelete }: Props) {
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false);
+            setIdLoading(null);
         }
     };
 
     return (
         <div>
+            <Badge color="gray" size={"3"}>
+                {statusOnCapitalizeCase[status]}
+            </Badge>
             {filterTask.map((task) => (
                 <Card
                     className="w-[270px] min-h-[125px] mt-4"
@@ -110,7 +121,8 @@ export default function GenericCard({ data, status, onDelete }: Props) {
                         <Button
                             color="green"
                             onClick={() => handleStatusButton(task)}
-                            loading={loading}
+                            loading={idLoading === task.id}
+                            id={task.id}
                         >
                             {task.status === "PENDING" ? (
                                 <>
@@ -121,16 +133,19 @@ export default function GenericCard({ data, status, onDelete }: Props) {
                                 "Complete"
                             )}
                         </Button>
-                        <Button variant="outline">
-                            <Pencil1Icon />
-                            Edit
-                        </Button>
+                        <UpdateTaskButton
+                            id={task.id}
+                            title={task.title}
+                            description={task.description}
+                            status={task.status}
+                            priority={task.priority}
+                        />
                         <Button
                             color="red"
                             variant="outline"
                             id={task.id}
                             onClick={() => handleDeleteButton(task.id)}
-                            loading={loading}
+                            loading={idLoading === task.id}
                         >
                             Delete
                         </Button>
