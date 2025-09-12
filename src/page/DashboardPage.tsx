@@ -1,15 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Grid } from "@radix-ui/themes";
 import AddTaskButton from "../components/AddTaskButton";
 import GenericCard from "../components/GenericCard";
 import { useAppContext } from "../hook/useAppContext";
 import { useEffect, useState } from "react";
 import type { Task } from "../utils/taskUtils";
+import AOS from "aos";
 
 export default function Dashboard() {
     const { getAllTasks } = useAppContext();
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
         const token = localStorage.getItem("token");
         if (!token) return;
 
@@ -29,9 +35,16 @@ export default function Dashboard() {
     }
 
     return (
-        <Box className="mt-4">
+        <Box className="mt-4" data-aos="fade-in">
             <AddTaskButton />
-            <Grid columns={"4"} gap={"5"} className="mt-4">
+            <Grid
+                gap={"5"}
+                columns={{ initial: "1", sm: "2", md: "4" }}
+                px={"4"}
+                className="mt-4"
+                data-aos="fade-up"
+                data-aos-delay="2000"
+            >
                 <GenericCard
                     data={tasks}
                     status="PENDING"

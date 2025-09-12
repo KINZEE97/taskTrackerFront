@@ -41,7 +41,7 @@ export default function AddTaskButton() {
 
     return (
         <>
-            <Box className="text-end">
+            <Box className="text-end px-4">
                 <Dialog.Root>
                     <Dialog.Trigger asChild>
                         <Button>

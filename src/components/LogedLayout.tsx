@@ -1,9 +1,18 @@
 import { ExitIcon } from "@radix-ui/react-icons";
 import { Box, Button, Container, Flex, Text, Tabs } from "@radix-ui/themes";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import AOS from "aos";
+import { useEffect } from "react";
 
 export default function LogedLayout() {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    });
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -11,13 +20,17 @@ export default function LogedLayout() {
     };
     return (
         <Container>
-            <header className="border-b-1 border-gray-700 ">
+            <header className="border-b-1 border-gray-700 px-4">
                 <Flex justify={"between"} align={"center"} className="py-10">
-                    <Text as="p" className="text-3xl font-bold text-blue-400">
+                    <Text
+                        as="p"
+                        className="text-3xl font-bold text-blue-400"
+                        data-aos="fade-right"
+                    >
                         Welcome to Task Tracker
                     </Text>
 
-                    <Box className="flex gap-4">
+                    <Box className="flex gap-4" data-aos="fade-left">
                         <Flex gap={"4"}>
                             <Tabs.Root defaultValue="dashboard">
                                 <Tabs.List>
