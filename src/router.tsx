@@ -9,11 +9,13 @@ import PublicRoutes from "./components/PublicRoutes";
 import LogedLayout from "./components/LogedLayout";
 import RegisterPage from "./page/RegisterPage";
 import Profile from "./page/ProfilePage";
+import ErrorBoundary from "./error/ErrorBoundery";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout />,
+        errorElement: <ErrorBoundary />,
         children: [
             { index: true, element: <LandingPage /> },
             { path: "features", element: <FeaturesPage /> },
