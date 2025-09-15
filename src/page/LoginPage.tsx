@@ -48,7 +48,7 @@ export default function Login() {
                 height={"80vh"}
             >
                 <Box
-                    className="border-1 rounded-2xl border-gray-700 p-2 w-[28rem] h-[20rem] bg-gray-900 "
+                    className="border-1 rounded-2xl border-gray-700 p-2  w-full h-auto sm:w-[28rem] sm:h-[20rem] bg-gray-900 "
                     data-aos="fade-up"
                 >
                     <Flex
@@ -126,16 +126,22 @@ export default function Login() {
                                 />
                             </Form.Control>
                         </Form.Field>
-                        <Form.Submit asChild>
-                            <Button size={"3"} loading={loading} type="submit">
-                                Login
-                            </Button>
-                        </Form.Submit>
-                        <Link to="/register">
-                            <Text className="text-gray-400 text-sm font-light pl-20 hover:text-white transition">
-                                Don't have an account? Register.
-                            </Text>
-                        </Link>
+                        <Flex className="flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                            <Form.Submit asChild>
+                                <Button
+                                    size={"3"}
+                                    loading={loading}
+                                    type="submit"
+                                >
+                                    Login
+                                </Button>
+                            </Form.Submit>
+                            <Link to="/register">
+                                <Text className="text-gray-400 text-sm font-light pl-20 hover:text-white transition">
+                                    Don't have an account? Register.
+                                </Text>
+                            </Link>
+                        </Flex>
                     </Form.Root>
                 </Box>
             </Flex>
