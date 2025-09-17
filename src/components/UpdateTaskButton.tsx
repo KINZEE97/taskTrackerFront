@@ -10,6 +10,7 @@ interface Props {
     description: string;
     status: string;
     priority: string;
+    onChange: () => void;
 }
 
 export default function UpdateTaskButton({
@@ -18,6 +19,7 @@ export default function UpdateTaskButton({
     description,
     status: initialStatus,
     priority: initialPriority,
+    onChange,
 }: Props) {
     const [loading, setLoading] = useState(false);
     const [taskTitle, setTaskTitle] = useState(title);
@@ -44,7 +46,7 @@ export default function UpdateTaskButton({
                 },
                 token
             );
-
+            onChange();
             return response;
         } catch (error) {
             console.log(error);

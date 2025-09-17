@@ -9,6 +9,7 @@ interface Props {
     data: Task[];
     status: TaskStatus;
     onDelete: (id: string) => void;
+    onChange: () => void;
 }
 
 const colorPriorityMap: Record<string, string> = {
@@ -31,7 +32,12 @@ const statusOnCapitalizeCase: Record<string, string> = {
     LATE: "Late",
 };
 
-export default function GenericCard({ data, status, onDelete }: Props) {
+export default function GenericCard({
+    data,
+    status,
+    onDelete,
+    onChange,
+}: Props) {
     const filterTask = data.filter((task) => task.status === status);
     const { handleDeleteTask, updateTaskStatus } = useAppContext();
     const token = localStorage.getItem("token");
@@ -43,7 +49,8 @@ export default function GenericCard({ data, status, onDelete }: Props) {
         try {
             const response = await handleDeleteTask(id, token);
             onDelete(id);
-            console.log(response);
+            onChange();
+            return response;
         } catch (error) {
             console.log(error);
         } finally {
@@ -68,8 +75,8 @@ export default function GenericCard({ data, status, onDelete }: Props) {
                 newStatus,
                 token
             );
-            console.log(updateTask);
 
+            onChange();
             return updateTask;
         } catch (error) {
             console.log(error);
@@ -139,6 +146,7 @@ export default function GenericCard({ data, status, onDelete }: Props) {
                             description={task.description}
                             status={task.status}
                             priority={task.priority}
+                            onChange={onChange}
                         />
                         <Button
                             color="red"

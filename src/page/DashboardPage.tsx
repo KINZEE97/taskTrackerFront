@@ -11,24 +11,25 @@ export default function Dashboard() {
     const { getAllTasks } = useAppContext();
     const [tasks, setTasks] = useState<Task[]>([]);
 
+    const fetchTasks = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        try {
+            const response = await getAllTasks(token);
+            setTasks(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         AOS.init({
             duration: 1000,
             once: true,
         });
-        const token = localStorage.getItem("token");
-        if (!token) return;
 
-        const fetchTasks = async () => {
-            try {
-                const response = await getAllTasks(token);
-                setTasks(response);
-            } catch (error) {
-                console.log(error);
-            }
-        };
         fetchTasks();
-    }, [tasks]);
+    }, []);
 
     function onDelete(id: string) {
         setTasks((prev) => prev.filter((task) => task.id !== id));
@@ -36,7 +37,7 @@ export default function Dashboard() {
 
     return (
         <Box className="mt-4" data-aos="fade-in">
-            <AddTaskButton />
+            <AddTaskButton onChange={fetchTasks} />
             <Grid
                 gap={"5"}
                 columns={{ initial: "1", sm: "2", md: "4" }}
@@ -49,14 +50,26 @@ export default function Dashboard() {
                     data={tasks}
                     status="PENDING"
                     onDelete={onDelete}
+                    onChange={fetchTasks}
                 />
                 <GenericCard
                     data={tasks}
                     status="IN_PROGRESS"
                     onDelete={onDelete}
+                    onChange={fetchTasks}
                 />
-                <GenericCard data={tasks} status="LATE" onDelete={onDelete} />
-                <GenericCard data={tasks} status="DONE" onDelete={onDelete} />
+                <GenericCard
+                    data={tasks}
+                    status="LATE"
+                    onDelete={onDelete}
+                    onChange={fetchTasks}
+                />
+                <GenericCard
+                    data={tasks}
+                    status="DONE"
+                    onDelete={onDelete}
+                    onChange={fetchTasks}
+                />
             </Grid>
         </Box>
     );

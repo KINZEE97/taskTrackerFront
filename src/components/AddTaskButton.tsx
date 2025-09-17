@@ -4,7 +4,11 @@ import { Box, Button, Flex } from "@radix-ui/themes";
 import React, { useState } from "react";
 import { useAppContext } from "../hook/useAppContext";
 
-export default function AddTaskButton() {
+interface addTaskButtonProps {
+    onChange: () => void;
+}
+
+export default function AddTaskButton({ onChange }: addTaskButtonProps) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState("PENDING");
@@ -33,7 +37,8 @@ export default function AddTaskButton() {
             setDescription("");
             setStatus("PENDING");
             setStatus("MEDIUM");
-            console.log(response);
+            onChange();
+            return response;
         } catch (error) {
             console.log(error);
         }
